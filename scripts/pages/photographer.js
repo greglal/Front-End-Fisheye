@@ -5,7 +5,11 @@ const contactButton = document.querySelector('.contact_button');
 const mainSection = document.querySelector('#main');
 const mediaSection = document.querySelector('.media-section');
 
-
+/**
+ * get photographers from json
+ *
+ * @returns {Promise<any>}
+ */
 async function getPhotographers() {
      const photographers = await fetch('../data/photographers.json')
         .then((data) => data.json())
@@ -15,20 +19,25 @@ async function getPhotographers() {
 let photographer;
 let photographerMedia;
 
-
-// récupération de l'id du photographe
-// récupération du photographe
-// récupération des médias du photographe
+/**
+ * get all photographer details and all photographer medias details
+ * create photographer's description
+ * display all photographer's medias
+ *
+ * @returns {Promise<*>}
+ */
 async function getPhotographer() {
     const {photographers, media} = await getPhotographers();
     const query = window.location.search;
     const name = new URLSearchParams(query).get('name');
     const id = new URLSearchParams(query).get('id');
 
-    photographerMedia = media.find((media) => {
+    //filter medias according to the photographer's id
+    photographerMedia = media.filter((media) => {
         return media.photographerId === parseInt(id);
         });
 
+    //give photographer according to his name
     photographer = photographers.find((photographer) => {
             return photographer.name === name;
         });
@@ -40,14 +49,19 @@ async function getPhotographer() {
     createPhotographDescription(photographer);
     photographHeader.appendChild(contactButton);
     createPhotographImg(photographer);
-    createMediaArticle(photographerMedia, photographer);
-    displayDataMedia(photographer);
+    await displayDataMedia(photographerMedia);
 
     return photographer;
 }
 
 getPhotographer();
 
+
+/**
+ *create photographer's description
+ *
+ * @param photographer
+ */
 function createPhotographDescription(photographer) {
     const photographDescription = document.createElement('div');
     const photographName = document.createElement('h2');
@@ -68,6 +82,11 @@ function createPhotographDescription(photographer) {
     photographTagLine.textContent = photographer.tagline;
 }
 
+/**
+ * create photographer's portrait
+ *
+ * @param photographer
+ */
 function createPhotographImg(photographer) {
     const photographPicture = document.createElement('img');
 
@@ -78,13 +97,24 @@ function createPhotographImg(photographer) {
 }
 
 let mediaImg;
+
+/**
+ * create article for media
+ * create HTML structure
+ * add css classes
+ *
+ * @param photographerMedia
+ * @param photographer
+ * @returns {HTMLElement}
+ */
 function createMediaArticle(photographerMedia, photographer) {
 
     const mediaArticle = document.createElement('article');
     const mediaDetails = document.createElement('div');
     const mediaTitle = document.createElement('h3');
-    const mediaLikes = document.createElement('p');
+    const mediaLikes = document.createElement('div');
 
+    //create img or video caption
     if (photographerMedia.video) {
         mediaImg = document.createElement('video');
         mediaArticle.appendChild(mediaImg);
@@ -98,6 +128,7 @@ function createMediaArticle(photographerMedia, photographer) {
     mediaArticle.classList.add("media-article");
     mediaDetails.classList.add("media-details");
     mediaLikes.classList.add("media-likes");
+    mediaImg.classList.add("media-img");
 
     mediaSection.appendChild(mediaArticle);
     mediaArticle.appendChild(mediaImg);
@@ -106,23 +137,21 @@ function createMediaArticle(photographerMedia, photographer) {
     mediaDetails.appendChild(mediaLikes);
 
     mediaTitle.textContent = photographerMedia.title;
-    mediaLikes.textContent = `${photographerMedia.likes} ❤️`;
-
-
+    mediaLikes.textContent = `${photographerMedia.likes} \u2665`;
 
     return mediaArticle;
 }
 
-async function displayDataMedia(photograph) {
-    if (photograph === photographer ) {
-        photographer.media.forEach((media) => {
-            const mediaCardDOM = createMediaArticle(media);
-            mainSection.appendChild(mediaCardDOM);
-        });
-    }
+/**
+ * loop on each media to create articles
+ *
+ * @param photographerMedia
+ * @returns {Promise<void>}
+ */
+async function displayDataMedia(photographerMedia) {
+    photographerMedia.forEach((media) => {
+        const mediaCardDOM = createMediaArticle(media, photographer);
+        mediaSection.appendChild(mediaCardDOM);
+    });
 }
-
-
-
-
 

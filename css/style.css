@@ -26,7 +26,7 @@ h2 {
 }
 
 h3 {
-    color : #D3573C;
+    color : #901C1C;
     height: 16px;
 }
 
@@ -144,7 +144,37 @@ h3 {
 
 hr{
     width: 70%;
-    margin:auto;
+    margin:0;
 }
 
+.media-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 100px;
+    margin-right: 100px;
+    justify-content:space-between;
+}
 
+.media-article{
+    width: 400px;
+    margin : 20px;
+}
+
+.media-img{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.media-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.media-likes{
+    color: #901C1C;
+    height: 16px;
+    margin-top: 20px;
+}
