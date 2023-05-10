@@ -113,31 +113,48 @@ function createMediaArticle(photographerMedia, photographer) {
     const mediaDetails = document.createElement('div');
     const mediaTitle = document.createElement('h3');
     const mediaLikes = document.createElement('div');
+    const numberOfLikes = document.createElement('p');
+    const heart = document.createElement('a');
 
     //create img or video caption
     if (photographerMedia.video) {
         mediaImg = document.createElement('video');
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.video}`);
+        mediaImg.setAttribute("alt", photographerMedia.title);
     } else {
         mediaImg = document.createElement('img');
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.image}`);
+        mediaImg.setAttribute("alt", photographerMedia.title);
     }
 
     mediaArticle.classList.add("media-article");
     mediaDetails.classList.add("media-details");
     mediaLikes.classList.add("media-likes");
     mediaImg.classList.add("media-img");
+    heart.classList.add("heart");
 
     mediaSection.appendChild(mediaArticle);
     mediaArticle.appendChild(mediaImg);
     mediaArticle.appendChild(mediaDetails);
     mediaDetails.appendChild(mediaTitle);
     mediaDetails.appendChild(mediaLikes);
+    mediaLikes.appendChild(numberOfLikes);
+    mediaLikes.appendChild(heart);
+
+    heart.setAttribute("href", "#");
+    heart.setAttribute("onclick", "return false");
 
     mediaTitle.textContent = photographerMedia.title;
-    mediaLikes.textContent = `${photographerMedia.likes} \u2665`;
+    numberOfLikes.textContent = photographerMedia.likes;
+    heart.textContent = '\u2665';
+
+    //increase number of likes on click
+    heart.addEventListener("click", ()=>{
+        photographerMedia.likes++;
+        numberOfLikes.textContent = photographerMedia.likes;
+    })
 
     return mediaArticle;
 }
@@ -154,4 +171,5 @@ async function displayDataMedia(photographerMedia) {
         mediaSection.appendChild(mediaCardDOM);
     });
 }
+
 

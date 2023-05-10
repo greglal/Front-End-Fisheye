@@ -176,5 +176,17 @@ hr{
 .media-likes{
     color: #901C1C;
     height: 16px;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.media-likes p{
+    margin-right: 10px;
+}
+
+.heart{
+    transform: scale(1.8);
+    margin-top: 5px;
+    text-decoration: none;
+    color: #901C1C;
 }
