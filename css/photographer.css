@@ -31,6 +31,9 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    position: absolute;
+    z-index: 1;
+    left: 25%;
 }
 
 .modal header {
@@ -73,4 +76,24 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+#media-carrousel{
+    display: none;
+}
+
+#media_modal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.previousArrow{
+    font-size:100px;
+    color: #901C1C;
+}
+
+.nextArrow{
+    font-size:100px;
+    color: #901C1C;
 }
