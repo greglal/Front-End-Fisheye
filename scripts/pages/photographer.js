@@ -1,61 +1,14 @@
 'use strict';
 
-const photographHeader = document.querySelector('.photograph-header');
-const contactButton = document.querySelector('.contact_button');
-const mainSection = document.querySelector('#main');
-const mediaSection = document.querySelector('.media-section');
-
-/**
- * get photographers from json
- *
- * @returns {Promise<any>}
- */
-async function getPhotographers() {
-     const photographers = await fetch('../data/photographers.json')
-        .then((data) => data.json())
-    return photographers;
-}
-
 let photographer;
 let photographerMedia;
+let photographHeader;
+let contactButton;
+let mediaSection;
+let mediaImg;
 
-/**
- * get all photographer details and all photographer medias details
- * create photographer's description
- * display all photographer's medias
- *
- * @returns {Promise<*>}
- */
-async function getPhotographer() {
-    const {photographers, media} = await getPhotographers();
-    const query = window.location.search;
-    const name = new URLSearchParams(query).get('name');
-    const id = new URLSearchParams(query).get('id');
-
-    //filter medias according to the photographer's id
-    photographerMedia = media.filter((media) => {
-        return media.photographerId === parseInt(id);
-        });
-
-    //give photographer according to his name
-    photographer = photographers.find((photographer) => {
-            return photographer.name === name;
-        });
-
-    const {name: photographerName, portrait: photographerPortrait, altLabel, city, country, tagline, price: pricePhotograpger, id: idPhotographer, asset} = photographer;
-    const {id: mediaId, photographerId, title: mediaTitle, video, image, likes, date, price: priceMedia} = photographerMedia;
-    picture = `assets/photographers/${photographer.portrait}`;
-
-    createPhotographDescription(photographer);
-    photographHeader.appendChild(contactButton);
-    createPhotographImg(photographer);
-    await displayDataMedia(photographerMedia);
-
-    return photographer;
-}
 
 getPhotographer();
-
 
 /**
  *create photographer's description
@@ -96,8 +49,6 @@ function createPhotographImg(photographer) {
     photographPicture.classList.add('photographer-picture');
 }
 
-let mediaImg;
-
 /**
  * create article for media
  * create HTML structure
@@ -108,7 +59,7 @@ let mediaImg;
  * @returns {HTMLElement}
  */
 function createMediaArticle(photographerMedia, photographer) {
-
+    mediaSection = document.querySelector('.media-section');
     const mediaArticle = document.createElement('article');
     const mediaDetails = document.createElement('div');
     const mediaTitle = document.createElement('h3');
@@ -122,11 +73,15 @@ function createMediaArticle(photographerMedia, photographer) {
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.video}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
+        mediaImg.setAttribute("id", photographerMedia.video);
+        mediaImg.setAttribute("onclick",`openMediaModal() ; getMediaId(${mediaImg}) ; createMediaModal()`);
     } else {
         mediaImg = document.createElement('img');
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.image}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
+        mediaImg.setAttribute("id", photographerMedia.image);
+        mediaImg.setAttribute("onclick",`openMediaModal() ; getMediaId(${mediaImg}) ; createMediaModal()`);
     }
 
     mediaArticle.classList.add("media-article");

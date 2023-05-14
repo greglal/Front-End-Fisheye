@@ -78,8 +78,13 @@ form input {
     border-radius: 5px;
 }
 
-#media-carrousel{
-    display: none;
+.media-carrousel {
+    width:2000px;
+    position: absolute;
+    left:-150px;
+    z-index: 1;
+    margin:auto;
+    align-self: center;
 }
 
 #media_modal{
@@ -91,9 +96,24 @@ form input {
 .previousArrow{
     font-size:100px;
     color: #901C1C;
+    text-decoration: none;
 }
 
 .nextArrow{
     font-size:100px;
     color: #901C1C;
+    text-decoration: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 500%;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(5px);
 }

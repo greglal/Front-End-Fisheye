@@ -1,10 +1,6 @@
 'use strict';
 
-    async function getPhotographers() {
-        const photographer = await fetch('../data/photographers.json')
-            .then((data) => data.json())
-            return photographer
-        }
+getPhotographers();
 
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");

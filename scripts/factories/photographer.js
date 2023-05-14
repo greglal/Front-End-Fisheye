@@ -7,7 +7,7 @@ function photographerFactory(data) {
     let article;
 
     function createIdCard() {
-        // div contenant la photo + le nom
+        // create div with name and portrait
         const divLink = document.createElement('a');
         divLink.classList.add('photographerId');
         divLink.setAttribute('href',"photographer.html?name=" + name + "&id=" + id);
@@ -17,13 +17,13 @@ function photographerFactory(data) {
         divImg.classList.add('identity')
         divLink.appendChild(divImg);
 
-        // photo de profil
+        // portrait
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
         img.setAttribute("alt", name);
         divImg.appendChild(img);
 
-        // nom du photographe
+        // photographer's name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         divLink.appendChild(h2);
@@ -35,17 +35,17 @@ function photographerFactory(data) {
         divPresentation.classList.add("presentation");
         article.appendChild( divPresentation );
 
-        // localisation du photographe (ville + pays)
+        // photographer's location (city + country)
         const location = document.createElement('h3');
         location.textContent = `${city}, ${country}`;
         divPresentation.appendChild(location);
 
-        // slogan du photographe
+        // photographer's tag
         const tag = document.createElement('p');
         tag.textContent = tagline;
         divPresentation.appendChild(tag);
 
-        // prix de la prestation /jour
+        // price per day
         const pricePerDay = document.createElement('p');
         pricePerDay.textContent = `${price}€/jour`;
         pricePerDay.classList.add('price');
