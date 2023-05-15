@@ -6,6 +6,7 @@ let photographHeader;
 let contactButton;
 let mediaSection;
 let mediaImg;
+let i=-1;
 
 
 getPhotographer();
@@ -74,14 +75,12 @@ function createMediaArticle(photographerMedia, photographer) {
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.video}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
         mediaImg.setAttribute("id", photographerMedia.video);
-        mediaImg.setAttribute("onclick",`; getMediaId(); openMediaModal() ; createMediaModal()`);
     } else {
         mediaImg = document.createElement('img');
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.image}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
         mediaImg.setAttribute("id", photographerMedia.image);
-        mediaImg.setAttribute("onclick",`; getMediaId(); openMediaModal() ; createMediaModal()`);
     }
 
     mediaArticle.classList.add("media-article");
@@ -111,9 +110,9 @@ function createMediaArticle(photographerMedia, photographer) {
         numberOfLikes.textContent = photographerMedia.likes;
     })
 
-
     return mediaArticle;
 }
+
 
 /**
  * loop on each media to create articles
@@ -124,18 +123,21 @@ function createMediaArticle(photographerMedia, photographer) {
 async function displayDataMedia(photographerMedia) {
     photographerMedia.forEach((media) => {
         const mediaCardDOM = createMediaArticle(media, photographer);
+        i++
+        mediaImg.setAttribute("onclick",`getMediaId(${i})`);
         mediaSection.appendChild(mediaCardDOM);
     });
 }
 
 
 // function sortByPopularity() {
-//     const medias = photographers.media;
+//     const medias = photographer.media;
 //     const numberOfLikes = photographerMedia.likes;
-//     const byValue = (a,b) => a - b;
+//     const byValue = (a,b) => a.likes - b.likes;
 //     const sortedByPopularity = [...numberOfLikes].sort(byValue);
 //     const popularity = document.querySelector("#popularity");
 //     popularity.setAttribute("onclick",sortedByPopularity);
 //
 //     console.log(medias);
 // }
+// sortByPopularity()
