@@ -74,14 +74,14 @@ function createMediaArticle(photographerMedia, photographer) {
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.video}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
         mediaImg.setAttribute("id", photographerMedia.video);
-        mediaImg.setAttribute("onclick",`openMediaModal() ; getMediaId(${mediaImg}) ; createMediaModal()`);
+        mediaImg.setAttribute("onclick",`; getMediaId(); openMediaModal() ; createMediaModal()`);
     } else {
         mediaImg = document.createElement('img');
         mediaArticle.appendChild(mediaImg);
         mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.image}`);
         mediaImg.setAttribute("alt", photographerMedia.title);
         mediaImg.setAttribute("id", photographerMedia.image);
-        mediaImg.setAttribute("onclick",`openMediaModal() ; getMediaId(${mediaImg}) ; createMediaModal()`);
+        mediaImg.setAttribute("onclick",`; getMediaId(); openMediaModal() ; createMediaModal()`);
     }
 
     mediaArticle.classList.add("media-article");
@@ -111,6 +111,7 @@ function createMediaArticle(photographerMedia, photographer) {
         numberOfLikes.textContent = photographerMedia.likes;
     })
 
+
     return mediaArticle;
 }
 
@@ -128,3 +129,13 @@ async function displayDataMedia(photographerMedia) {
 }
 
 
+// function sortByPopularity() {
+//     const medias = photographers.media;
+//     const numberOfLikes = photographerMedia.likes;
+//     const byValue = (a,b) => a - b;
+//     const sortedByPopularity = [...numberOfLikes].sort(byValue);
+//     const popularity = document.querySelector("#popularity");
+//     popularity.setAttribute("onclick",sortedByPopularity);
+//
+//     console.log(medias);
+// }

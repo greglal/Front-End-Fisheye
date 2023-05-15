@@ -117,3 +117,27 @@ form input {
     left: 0;
     backdrop-filter: blur(5px);
 }
+
+.previousArrow{
+    margin-top:300px;
+}
+
+.nextArrow{
+    margin-top:300px;
+}
+
+.full-media{
+    width: 700px;
+    height: 700px;
+}
+
+.full-media img{
+    width: 700px;
+    height : 700px;
+    position: absolute;
+}
+
+.sortLink{
+    text-decoration: none;
+    color:white;
+}
