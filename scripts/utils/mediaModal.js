@@ -1,7 +1,5 @@
 'use strict';
 
-let mediaId;
-
 
 /**
  * opening media modal
@@ -14,7 +12,6 @@ function openMediaModal(){
     mediaModal.style.display = "block";
     overlay.classList.remove("hidden");
     overlay.setAttribute("onclick","closeMediaModal()");
-
 }
 
 /**
@@ -29,38 +26,81 @@ function closeMediaModal(){
     overlay.classList.add("hidden");
 }
 
-function createMediaModal(mediaId, photographerMedia) {
+/**
+ * create media Modal for photography or video
+ *
+ * @param mediaId
+ * @param media
+ */
+function createMediaModal(mediaId, media) {
     const mediaModal = document.querySelector(".full-media");
     let mediaDisplay;
 
-    if(photographerMedia.video) {
-        console.log("*** video ***", photographerMedia)
-
+    if(media.video) {
         mediaDisplay = document.createElement("video");
         mediaDisplay.controls = true;
         mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${mediaId}`);
-        mediaDisplay.setAttribute("alt", photographerMedia.title);
+        mediaDisplay.setAttribute("alt", media.title);
         mediaDisplay.classList.add("displayVideo");
-        mediaModal.appendChild(mediaDisplay);
     } else {
-        console.log("*** img ***", photographerMedia)
-
         mediaDisplay = document.createElement("img");
         mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${mediaId}`);
-        mediaDisplay.setAttribute("alt", photographerMedia.title);
-        mediaModal.appendChild(mediaDisplay);
-
-        console.log("*** photographerMedia ***", mediaId);
+        mediaDisplay.setAttribute("alt", media.title);
     }
+    mediaModal.appendChild(mediaDisplay);
+
+    previousMedia(media);
+    nextMedia(media);
 }
 
-
+/**
+ * get media id to display media modal
+ * @param i
+ */
 function getMediaId(i) {
     const allMedias = document.querySelectorAll(".media-img");
-    mediaId = allMedias[i].getAttribute("id");
-console.log(photographerMedia[i])
+    const mediaId = allMedias[i].getAttribute("id");
+
     createMediaModal(mediaId, photographerMedia[i]);
     openMediaModal();
 }
 
+/**
+ * display previous media by click on left arrow
+ * @param media
+ */
+function previousMedia(media) {
+    const previousArrow = document.querySelector(".previousArrow");
+    const mediaModal = document.querySelector(".full-media");
+    const currentMediaDisplay = mediaModal.querySelector("img, video");
 
+    previousArrow.addEventListener("click", () => {
+        const currentIndex = photographerMedia.indexOf((media));
+        const previousIndex = currentIndex - 1;
+        mediaModal.removeChild(currentMediaDisplay);
+
+        if (previousIndex > 0 && previousIndex <= photographerMedia.length){
+            getMediaId(previousIndex);
+        }
+    });
+}
+
+/**
+ * display next media by click on right arrow
+ * @param media
+ */
+function nextMedia(media) {
+    const nextArrow = document.querySelector(".nextArrow");
+    const mediaModal = document.querySelector(".full-media");
+    const currentMediaDisplay = mediaModal.querySelector("img, video");
+
+    nextArrow.addEventListener("click", () => {
+        const currentIndex = photographerMedia.indexOf((media));
+        const nextIndex = currentIndex + 1;
+        mediaModal.removeChild(currentMediaDisplay);
+
+        if (nextIndex >= 0 && nextIndex < photographerMedia.length){
+            getMediaId(nextIndex)
+        }
+    });
+}

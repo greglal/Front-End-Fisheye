@@ -129,15 +129,3 @@ async function displayDataMedia(photographerMedia) {
     });
 }
 
-
-// function sortByPopularity() {
-//     const medias = photographer.media;
-//     const numberOfLikes = photographerMedia.likes;
-//     const byValue = (a,b) => a.likes - b.likes;
-//     const sortedByPopularity = [...numberOfLikes].sort(byValue);
-//     const popularity = document.querySelector("#popularity");
-//     popularity.setAttribute("onclick",sortedByPopularity);
-//
-//     console.log(medias);
-// }
-// sortByPopularity()
