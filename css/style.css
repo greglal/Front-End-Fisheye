@@ -215,3 +215,8 @@ full-media{
     padding-left: 25px;
     color: black;
 }
+
+.hidden{
+    display: none;
+
+}

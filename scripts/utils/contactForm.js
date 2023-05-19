@@ -29,7 +29,6 @@ function closeModal() {
  */
 function isInvalid(element, message) {
     element.style.border = "4px solid red";
-    element.style.backgroundColor = "rgba(255, 0, 0, 0.25)";
     element.setAttribute("placeholder", message);
 }
 

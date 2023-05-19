@@ -6,8 +6,6 @@ let photographHeader;
 let contactButton;
 let mediaSection;
 let mediaImg;
-let i=-1;
-
 
 getPhotographer();
 
@@ -55,11 +53,11 @@ function createPhotographImg(photographer) {
  * create HTML structure
  * add css classes
  *
- * @param photographerMedia
+ * @param media
  * @param photographer
  * @returns {HTMLElement}
  */
-function createMediaArticle(photographerMedia, photographer) {
+function createMediaArticle(media, photographer) {
     mediaSection = document.querySelector('.media-section');
     const mediaArticle = document.createElement('article');
     const mediaDetails = document.createElement('div');
@@ -69,18 +67,18 @@ function createMediaArticle(photographerMedia, photographer) {
     const heart = document.createElement('a');
 
     //create img or video caption
-    if (photographerMedia.video) {
+    if (media.video) {
         mediaImg = document.createElement('video');
         mediaArticle.appendChild(mediaImg);
-        mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.video}`);
-        mediaImg.setAttribute("alt", photographerMedia.title);
-        mediaImg.setAttribute("id", photographerMedia.video);
+        mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
+        mediaImg.setAttribute("alt", media.title);
+        mediaImg.setAttribute("id", media.video);
     } else {
         mediaImg = document.createElement('img');
         mediaArticle.appendChild(mediaImg);
-        mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${photographerMedia.image}`);
-        mediaImg.setAttribute("alt", photographerMedia.title);
-        mediaImg.setAttribute("id", photographerMedia.image);
+        mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
+        mediaImg.setAttribute("alt", media.title);
+        mediaImg.setAttribute("id", media.image);
     }
 
     mediaArticle.classList.add("media-article");
@@ -100,19 +98,20 @@ function createMediaArticle(photographerMedia, photographer) {
     heart.setAttribute("href", "#");
     heart.setAttribute("onclick", "return false");
 
-    mediaTitle.textContent = photographerMedia.title;
-    numberOfLikes.textContent = photographerMedia.likes;
+    mediaTitle.textContent = media.title;
+    numberOfLikes.textContent = media.likes;
     heart.textContent = '\u2665';
 
     //increase number of likes on click
-    heart.addEventListener("click", ()=>{
-        photographerMedia.likes++;
-        numberOfLikes.textContent = photographerMedia.likes;
-    })
+    heart.addEventListener("click", () => {
+        handleClick(media, numberOfLikes, heart);
+        displayCounterAndPrice()
+        return numberOfLikes
+    });
+    displayCounterAndPrice();
 
     return mediaArticle;
 }
-
 
 /**
  * loop on each media to create articles
@@ -121,6 +120,7 @@ function createMediaArticle(photographerMedia, photographer) {
  * @returns {Promise<void>}
  */
 async function displayDataMedia(photographerMedia) {
+    let i=-1;
     photographerMedia.forEach((media) => {
         const mediaCardDOM = createMediaArticle(media, photographer);
         i++
@@ -129,3 +129,42 @@ async function displayDataMedia(photographerMedia) {
     });
 }
 
+/**
+ * count nulber of likes for all medias
+ * @returns {number}
+ */
+function totalLikesCounter(){
+    let counter = 0;
+    let mediaCount;
+
+    photographerMedia.forEach((media) => {
+        mediaCount = Number(media.likes);
+        counter = counter + mediaCount ;
+    })
+
+    return counter;
+}
+
+/**
+ * display total like counter and price per day
+ */
+function displayCounterAndPrice() {
+    const totalLikes = document.querySelector(".total_likes");
+    const pricePerDay = document.querySelector(".price_per_day");
+    let counter = totalLikesCounter();
+
+    totalLikes.textContent = counter ;
+    pricePerDay.textContent = `${photographer.price} € / jour`;
+
+    console.log("**** counter ****", counter)
+}
+
+function handleClick(media, likes, element) {
+    if(!media.liked){
+        media.likes++;
+        likes.textContent = media.likes;
+        media.liked=true;
+        totalLikesCounter()
+    }
+    // element.removeEventListener("click", handleClick);
+}

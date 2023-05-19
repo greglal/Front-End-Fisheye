@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * opening media modal
  * add blur on page's background
@@ -8,9 +7,15 @@
 function openMediaModal(){
     const mediaModal = document.querySelector(".media-carrousel");
     const overlay = document.querySelector(".overlay");
+    const photographHeader = document.querySelector(".photograph-header");
+    const filter = document.querySelector(".filter-div");
+    const mediaSection = document.querySelector(".media-section");
 
     mediaModal.style.display = "block";
     overlay.classList.remove("hidden");
+    photographHeader.classList.add("hidden");
+    filter.classList.add("hidden");
+    mediaSection.classList.add("hidden");
     overlay.setAttribute("onclick","closeMediaModal()");
 }
 
@@ -21,9 +26,15 @@ function openMediaModal(){
 function closeMediaModal(){
     const mediaModal = document.querySelector(".media-carrousel");
     const overlay = document.querySelector(".overlay");
+    const photographHeader = document.querySelector(".photograph-header");
+    const filter = document.querySelector(".filter-div");
+    const mediaSection = document.querySelector(".media-section");
 
     mediaModal.style.display = "none";
     overlay.classList.add("hidden");
+    photographHeader.classList.remove("hidden");
+    filter.classList.remove("hidden");
+    mediaSection.classList.remove("hidden");
 }
 
 /**
@@ -79,7 +90,7 @@ function previousMedia(media) {
         const previousIndex = currentIndex - 1;
         mediaModal.removeChild(currentMediaDisplay);
 
-        if (previousIndex > 0 && previousIndex <= photographerMedia.length){
+        if (previousIndex >= 0 && previousIndex <= photographerMedia.length){
             getMediaId(previousIndex);
         }
     });
@@ -99,7 +110,7 @@ function nextMedia(media) {
         const nextIndex = currentIndex + 1;
         mediaModal.removeChild(currentMediaDisplay);
 
-        if (nextIndex >= 0 && nextIndex < photographerMedia.length){
+        if (nextIndex >= 0 && nextIndex < photographerMedia.length-1){
             getMediaId(nextIndex)
         }
     });

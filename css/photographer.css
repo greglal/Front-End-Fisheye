@@ -31,9 +31,10 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     left: 25%;
+    top: 50px;
 }
 
 .modal header {
@@ -80,7 +81,7 @@ form input {
 
 .media-carrousel {
     width:2000px;
-    position: absolute;
+    position: fixed;
     left:-150px;
     z-index: 1;
     margin:auto;
@@ -140,4 +141,38 @@ form input {
 .sortLink{
     text-decoration: none;
     color:white;
+}
+
+.counter_price{
+    position: fixed;
+    background-color: #D3573C;
+    color: #525252;
+    width: 250px;
+    height: 60px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    left: 80%;
+    top: 90%;
+}
+
+.counter {
+    display:flex;
+    flex-direction: row;
+    width: 90px;
+    justify-content:space-evenly;
+    font-size:18px;
+    font-weight: bold;
+}
+
+.price_per_day{
+    margin-top:20px;
+    font-size:18px;
+    font-weight: bold;
+}
+
+.counter_heart{
+    font-size: 24px;
+    font-weight : bold;
+    margin-top: 14px;
 }
