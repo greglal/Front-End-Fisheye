@@ -1,6 +1,5 @@
 'use strict';
 
-getPhotographers();
 
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
@@ -11,7 +10,7 @@ getPhotographers();
             photographersSection.appendChild(userCardDOM);
         });
     }
-
+    const photographer = new PhotographerManager()
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
