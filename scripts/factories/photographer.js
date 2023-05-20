@@ -3,7 +3,7 @@ let picture;
 
 function photographerFactory(data) {
     const { name, portrait, altLabel, city, country, tagline, price, id } = data;
-    picture = `assets/photographers/${portrait}`;
+    let picture = `assets/photographers/${portrait}`;
     let article;
 
     function createIdCard() {

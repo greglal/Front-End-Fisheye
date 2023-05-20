@@ -1,7 +1,6 @@
 'use strict';
 
-class PhotographerPageManager extends ModalMedia {
-
+class PhotographerPageManager extends PhotographerManager {
     getPhotographer() {
         return super.getPhotographer();
     }
@@ -18,7 +17,7 @@ class PhotographerPageManager extends ModalMedia {
         const photographTagLine = document.createElement('p');
 
         photographDescription.classList.add('photographer-description');
-        photographHeader.appendChild(photographDescription);
+        this.photographHeader.appendChild(photographDescription);
 
         photographDescription.appendChild(photographName);
         photographName.textContent = photographer.name;
@@ -39,7 +38,7 @@ class PhotographerPageManager extends ModalMedia {
     createPhotographImg(photographer) {
         const photographPicture = document.createElement('img');
 
-        photographHeader.appendChild(photographPicture);
+        this.photographHeader.appendChild(photographPicture);
         photographPicture.setAttribute("src", picture);
         photographPicture.setAttribute("alt", photographer.name);
         photographPicture.classList.add('photographer-picture');
@@ -62,16 +61,17 @@ class PhotographerPageManager extends ModalMedia {
         const mediaLikes = document.createElement('div');
         const numberOfLikes = document.createElement('p');
         const heart = document.createElement('a');
+        let mediaImg;
 
         //create img or video caption
         if (media.video) {
-            const mediaImg = document.createElement('video');
+            mediaImg = document.createElement('video');
             mediaArticle.appendChild(mediaImg);
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
             mediaImg.setAttribute("alt", media.title);
             mediaImg.setAttribute("id", media.video);
         } else {
-            const mediaImg = document.createElement('img');
+            mediaImg = document.createElement('img');
             mediaArticle.appendChild(mediaImg);
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
             mediaImg.setAttribute("alt", media.title);
@@ -119,7 +119,9 @@ class PhotographerPageManager extends ModalMedia {
     async displayDataMedia(photographerMedia) {
         let i=-1;
         photographerMedia.forEach((media) => {
-            const mediaCardDOM = this.createMediaArticle(media, photographer);
+            const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+            const mediaImg = document.querySelector(".media-img")
+            const mediaSection = document.querySelector('.media-section');
             i++
             mediaImg.setAttribute("onclick",`getMediaId(${i})`);
             mediaSection.appendChild(mediaCardDOM);
@@ -127,14 +129,14 @@ class PhotographerPageManager extends ModalMedia {
     }
 
     /**
-     * count nulber of likes for all medias
+     * count number of likes for all medias
      * @returns {number}
      */
     totalLikesCounter(){
         let counter = 0;
         let mediaCount;
 
-        photographerMedia.forEach((media) => {
+        this.photographerMedia.forEach((media) => {
             mediaCount = Number(media.likes);
             counter = counter + mediaCount ;
         })
@@ -151,12 +153,12 @@ class PhotographerPageManager extends ModalMedia {
         let counter = this.totalLikesCounter();
 
         totalLikes.textContent = counter ;
-        pricePerDay.textContent = `${photographer.price} € / jour`;
+        pricePerDay.textContent = `${this.photographer.price} € / jour`;
 
         console.log("**** counter ****", counter)
     }
 
-    handleClick(media, likes, element) {
+    handleClick(media, likes) {
         if(!media.liked){
             media.likes++;
             likes.textContent = media.likes;
@@ -167,22 +169,7 @@ class PhotographerPageManager extends ModalMedia {
 }
 
 const photographerPage = new PhotographerPageManager();
-
-function createPhotographDescription() {
-    photographerPage.createPhotographDescription();
-}
-
-function displayDataMedia() {
-    photographerPage.displayDataMedia();
-}
-
-function createPhotographImg() {
-    photographerPage.createPhotographImg();
-}
-
-
-
-
+photographerPage.getPhotographer();
 
 
 

@@ -25,30 +25,30 @@ class PhotographerManager {
         const query = window.location.search;
         const name = new URLSearchParams(query).get('name');
         const id = new URLSearchParams(query).get('id');
-        photographHeader = document.querySelector('.photograph-header');
-        contactButton = document.querySelector('.contact_button');
+        this.photographHeader = document.querySelector('.photograph-header');
+        this.contactButton = document.querySelector('.contact_button');
 
         //filter medias according to the photographer's id
-        photographerMedia = media.filter((media) => {
+        this.photographerMedia = media.filter((media) => {
             return media.photographerId === parseInt(id);
         });
 
         //give photographer according to his name
-        photographer = photographers.find((photographer) => {
+        this.photographer = photographers.find((photographer) => {
             return photographer.name === name;
         });
 
-        const {name: photographerName, portrait: photographerPortrait, altLabel, city, country, tagline, price: pricePhotograpger, id: idPhotographer, asset} = photographer;
-        const {id: mediaId, photographerId, title: mediaTitle, video, image, likes, date, price: priceMedia} = photographerMedia;
-        picture = `assets/photographers/${photographer.portrait}`;
+        const {name: photographerName, portrait: photographerPortrait, altLabel, city, country, tagline, price: pricePhotograpger, id: idPhotographer, asset} = this.photographer;
+        const {id: mediaId, photographerId, title: mediaTitle, video, image, likes, date, price: priceMedia} = this.photographerMedia;
+        picture = `assets/photographers/${this.photographer.portrait}`;
 
-        this.createPhotographDescription(photographer);
-        photographHeader.appendChild(contactButton);
-        this.createPhotographImg(photographer);
-        await this.displayDataMedia(photographerMedia);
+        photographerPage.createPhotographDescription(this.photographer);
+        photographerPage.photographHeader.appendChild(this.contactButton);
+        photographerPage.createPhotographImg(this.photographer);
+        await photographerPage.displayDataMedia(this.photographerMedia);
         //createMediaModal(photographerMedia, photographer);
 
-        return photographer;
+        return this.photographer;
     }
 }
 

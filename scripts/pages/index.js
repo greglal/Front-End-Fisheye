@@ -1,7 +1,7 @@
 'use strict';
 
-
-    async function displayData(photographers) {
+class IndexPageManager extends PhotographerManager {
+    async displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
 
         photographers.forEach((photographer) => {
@@ -10,12 +10,13 @@
             photographersSection.appendChild(userCardDOM);
         });
     }
-    const photographer = new PhotographerManager()
-    async function init() {
+
+    async init() {
         // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
+        const { photographers } = await this.getPhotographers();
+        this.displayData(photographers);
     }
-    
-    init();
-    
+}
+
+const indexPageManager = new IndexPageManager();
+indexPageManager.init();

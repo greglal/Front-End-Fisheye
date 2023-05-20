@@ -1,6 +1,8 @@
 'use strict';
 
-class ModalMedia extends PhotographerManager {
+class ModalMedia extends PhotographerPageManager {
+
+
     /**
      * opening media modal
      * add blur on page's background
@@ -71,10 +73,17 @@ class ModalMedia extends PhotographerManager {
      */
     getMediaId(i) {
         const allMedias = document.querySelectorAll(".media-img");
-        const mediaId = allMedias[i].getAttribute("id");
+        let mediaId;
 
-        this.createMediaModal(mediaId, photographerMedia[i]);
+        allMedias.forEach((media) =>
+        {
+            mediaId = media[i].getAttribute("id");
+        })
+
+        this.createMediaModal(mediaId, this.photographerMedia[i]);
         this.openMediaModal();
+
+        console.log("**** catch media ****", mediaId)
     }
 
     /**
@@ -87,11 +96,11 @@ class ModalMedia extends PhotographerManager {
         const currentMediaDisplay = mediaModal.querySelector("img, video");
 
         previousArrow.addEventListener("click", () => {
-            const currentIndex = photographerMedia.indexOf((media));
+            const currentIndex = this.photographerMedia.indexOf((media));
             const previousIndex = currentIndex - 1;
             mediaModal.removeChild(currentMediaDisplay);
 
-            if (previousIndex >= 0 && previousIndex <= photographerMedia.length){
+            if (previousIndex >= 0 && previousIndex <= this.photographerMedia.length){
                 this.getMediaId(previousIndex);
             }
         });
@@ -107,18 +116,20 @@ class ModalMedia extends PhotographerManager {
         const currentMediaDisplay = mediaModal.querySelector("img, video");
 
         nextArrow.addEventListener("click", () => {
-            const currentIndex = photographerMedia.indexOf((media));
+            const currentIndex = this.photographerMedia.indexOf((media));
             const nextIndex = currentIndex + 1;
             mediaModal.removeChild(currentMediaDisplay);
 
-            if (nextIndex >= 0 && nextIndex < photographerMedia.length-1){
+            if (nextIndex >= 0 && nextIndex < this.photographerMedia.length-1){
                 this.getMediaId(nextIndex)
             }
         });
     }
+
 }
 
-
+const modal = new ModalMedia();
+modal.createMediaModal()
 
 
 
