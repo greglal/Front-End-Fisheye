@@ -79,11 +79,14 @@ class ModalMedia extends PhotographerPageManager {
      */
     previousMedia(media, photographerMedia, photographer) {
         const previousArrow = document.querySelector(".previousArrow");
+        const mediaModal = document.querySelector(".full-media");
+        const currentMediaDisplay = mediaModal.querySelector("img, video");
         this.photographer = photographer;
 
         previousArrow.addEventListener("click", () => {
             const currentIndex = photographerMedia.indexOf((media));
             const previousIndex = currentIndex - 1;
+            mediaModal.removeChild(currentMediaDisplay)
 
             if (previousIndex >= 0 && previousIndex <= photographerMedia.length){
                 this.getMediaId(previousIndex, photographerMedia,photographer );
@@ -106,7 +109,6 @@ class ModalMedia extends PhotographerPageManager {
         this. openMediaModal();
     }
 
-
     /**
      * display next media by click on right arrow
      *
@@ -116,26 +118,21 @@ class ModalMedia extends PhotographerPageManager {
      */
     nextMedia(media, photographerMedia, photographer) {
         const nextArrow = document.querySelector(".nextArrow");
+        const mediaModal = document.querySelector(".full-media");
+        const currentMediaDisplay = mediaModal.querySelector("img, video");
         this.photographer = photographer;
 
         nextArrow.addEventListener("click",
             () => {
                 const currentIndex = photographerMedia.indexOf((media));
                 const nextIndex = currentIndex + 1;
+                mediaModal.removeChild(currentMediaDisplay)
 
                 if (nextIndex >= 0 && nextIndex <= photographerMedia.length - 1) {
                     this.getMediaId(nextIndex, photographerMedia, photographer);
                 }
             });
         }
-    }
 
-
-
-
-
-
-
-
-
+}
 

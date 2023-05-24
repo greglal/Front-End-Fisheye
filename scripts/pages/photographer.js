@@ -120,15 +120,21 @@ class PhotographerPageManager extends PhotographerManager {
         let i=-1;
         const mediaSection = document.querySelector('.media-section');
         const mediaModal = new ModalMedia;
+
+        mediaSection.innerHTML = "";
+
         photographerMedia.forEach((media, index) => {
             const mediaCardDOM = this.createMediaArticle(media, this.photographer);
             i++
-            console.log(media)
+
             mediaCardDOM.mediaImg.addEventListener("click", () => {
                 mediaModal.getMediaId(index, photographerMedia, this.photographer)
             });
             mediaSection.appendChild(mediaCardDOM.mediaArticle);
         });
+        this.sortByPopularity(photographerMedia);
+        this.sortByDate(photographerMedia);
+        this.sortByTitle(photographerMedia);
     }
 
     /**
@@ -157,10 +163,14 @@ class PhotographerPageManager extends PhotographerManager {
 
         totalLikes.textContent = counter ;
         pricePerDay.textContent = `${this.photographer.price} € / jour`;
-
-        console.log("**** counter ****", counter)
     }
 
+    /**
+     * limit click on like to 1 like
+     *
+     * @param media
+     * @param likes
+     */
     handleClick(media, likes) {
         if(!media.liked){
             media.likes++;
@@ -169,6 +179,95 @@ class PhotographerPageManager extends PhotographerManager {
             this.totalLikesCounter()
         }
     }
+
+    /**
+     * sort media by number of likes
+     * sort by click on "popularité"
+     * from most liked to less liked
+     *
+     * @param photographerMedia
+     */
+    sortByPopularity(photographerMedia){
+        const popularityButton = document.querySelector("#popularity");
+        const mediaSection = document.querySelector('.media-section');
+
+        popularityButton.addEventListener("click", () => {
+            photographerMedia.sort(function(a, b){
+                return b.likes - a.likes
+            })
+            while (mediaSection.firstChild) {
+                mediaSection.firstChild.remove();
+            }
+            photographerMedia.forEach((media) => {
+                const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                mediaSection.appendChild(mediaCardDOM.mediaArticle);
+            });
+        })
+    }
+
+    /**
+     * sort media by date
+     * sort by click on "date"
+     * form most recent to oldest
+     *
+     * @param photographerMedia
+     */
+    sortByDate(photographerMedia){
+        const dateButton = document.querySelector("#date");
+        const mediaSection = document.querySelector('.media-section');
+
+        dateButton.addEventListener("click", () => {
+            photographerMedia.sort(function(a, b){
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+
+                return dateB - dateA
+            })
+            while (mediaSection.firstChild) {
+                mediaSection.firstChild.remove();
+            }
+            photographerMedia.forEach((media) => {
+                const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                mediaSection.appendChild(mediaCardDOM.mediaArticle);
+            });
+        })
+    }
+
+    /**
+     * sort media by title
+     * sort by click on "titre"
+     * from A to Z
+     *
+     * @param photographerMedia
+     */
+    sortByTitle(photographerMedia){
+        const titleButton = document.querySelector("#title");
+        const mediaSection = document.querySelector('.media-section');
+
+        titleButton.addEventListener("click", () => {
+            photographerMedia.sort(function(a, b){
+                const titleA = a.title.toLowerCase();
+                const titleB = b.title.toLowerCase();
+
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
+                return 0;
+            })
+
+            while (mediaSection.firstChild) {
+                mediaSection.firstChild.remove();
+            }
+            photographerMedia.forEach((media) => {
+                const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                mediaSection.appendChild(mediaCardDOM.mediaArticle);
+            });
+        })
+    }
+
 }
 
 const photographerPage = new PhotographerPageManager();
