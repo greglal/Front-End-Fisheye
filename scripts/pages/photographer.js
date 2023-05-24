@@ -51,7 +51,7 @@ class PhotographerPageManager extends PhotographerManager {
      *
      * @param media
      * @param photographer
-     * @returns {HTMLElement}
+     * @returns {{mediaArticle: HTMLElement, mediaImg: HTMLImageElement | HTMLVideoElement}}
      */
     createMediaArticle(media, photographer) {
         const mediaSection = document.querySelector('.media-section');
@@ -107,7 +107,7 @@ class PhotographerPageManager extends PhotographerManager {
         });
         this.displayCounterAndPrice();
 
-        return mediaArticle;
+        return {mediaArticle, mediaImg};
     }
 
     /**
@@ -118,13 +118,16 @@ class PhotographerPageManager extends PhotographerManager {
      */
     async displayDataMedia(photographerMedia) {
         let i=-1;
-        photographerMedia.forEach((media) => {
+        const mediaSection = document.querySelector('.media-section');
+        const mediaModal = new ModalMedia;
+        photographerMedia.forEach((media, index) => {
             const mediaCardDOM = this.createMediaArticle(media, this.photographer);
-            const mediaImg = document.querySelector(".media-img")
-            const mediaSection = document.querySelector('.media-section');
             i++
-            mediaImg.setAttribute("onclick",`getMediaId(${i})`);
-            mediaSection.appendChild(mediaCardDOM);
+            console.log(media)
+            mediaCardDOM.mediaImg.addEventListener("click", () => {
+                mediaModal.getMediaId(index, photographerMedia, this.photographer)
+            });
+            mediaSection.appendChild(mediaCardDOM.mediaArticle);
         });
     }
 
@@ -169,7 +172,7 @@ class PhotographerPageManager extends PhotographerManager {
 }
 
 const photographerPage = new PhotographerPageManager();
-photographerPage.getPhotographer();
+photographerPage.getPhotographer()
 
 
 

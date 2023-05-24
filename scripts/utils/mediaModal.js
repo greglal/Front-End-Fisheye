@@ -41,14 +41,17 @@ class ModalMedia extends PhotographerPageManager {
     }
 
     /**
-     * create media Modal for photography or video
      *
      * @param mediaId
      * @param media
+     * @param photographer
+     * @param photographerMedia
      */
-    createMediaModal(mediaId, media) {
+    createMediaModal(mediaId, media, photographer, photographerMedia) {
         const mediaModal = document.querySelector(".full-media");
         let mediaDisplay;
+        this.photographer = photographer;
+        this.photographerMedia = photographerMedia;
 
         if(media.video) {
             mediaDisplay = document.createElement("video");
@@ -63,73 +66,69 @@ class ModalMedia extends PhotographerPageManager {
         }
         mediaModal.appendChild(mediaDisplay);
 
-        this.previousMedia(media);
-        this.nextMedia(media);
+        this.previousMedia(media, photographerMedia, photographer);
+        this.nextMedia(media, photographerMedia, photographer);
     }
 
     /**
-     * get media id to display media modal
-     * @param i
-     */
-    getMediaId(i) {
-        const allMedias = document.querySelectorAll(".media-img");
-        let mediaId;
-
-        allMedias.forEach((media) =>
-        {
-            mediaId = media[i].getAttribute("id");
-        })
-
-        this.createMediaModal(mediaId, this.photographerMedia[i]);
-        this.openMediaModal();
-
-        console.log("**** catch media ****", mediaId)
-    }
-
-    /**
-     * display previous media by click on left arrow
+     * Display previous media by clicking on left arrow
+     *
      * @param media
+     * @param photographerMedia
+     * @param photographer
      */
-    previousMedia(media) {
+    previousMedia(media, photographerMedia, photographer) {
         const previousArrow = document.querySelector(".previousArrow");
-        const mediaModal = document.querySelector(".full-media");
-        const currentMediaDisplay = mediaModal.querySelector("img, video");
+        this.photographer = photographer;
 
         previousArrow.addEventListener("click", () => {
-            const currentIndex = this.photographerMedia.indexOf((media));
+            const currentIndex = photographerMedia.indexOf((media));
             const previousIndex = currentIndex - 1;
-            mediaModal.removeChild(currentMediaDisplay);
 
-            if (previousIndex >= 0 && previousIndex <= this.photographerMedia.length){
-                this.getMediaId(previousIndex);
+            if (previousIndex >= 0 && previousIndex <= photographerMedia.length){
+                this.getMediaId(previousIndex, photographerMedia,photographer );
             }
         });
     }
+
+    /**
+     * pick media id
+     *
+     * @param i
+     * @param media
+     * @param photographer
+     */
+    getMediaId(i, media, photographer) {
+        const allMedias = document.querySelectorAll(".media-img");
+        const mediaId = allMedias[i].getAttribute("id");
+
+        this. createMediaModal(mediaId, media[i], photographer, media);
+        this. openMediaModal();
+    }
+
 
     /**
      * display next media by click on right arrow
+     *
      * @param media
+     * @param photographerMedia
+     * @param photographer
      */
-    nextMedia(media) {
+    nextMedia(media, photographerMedia, photographer) {
         const nextArrow = document.querySelector(".nextArrow");
-        const mediaModal = document.querySelector(".full-media");
-        const currentMediaDisplay = mediaModal.querySelector("img, video");
+        this.photographer = photographer;
 
-        nextArrow.addEventListener("click", () => {
-            const currentIndex = this.photographerMedia.indexOf((media));
-            const nextIndex = currentIndex + 1;
-            mediaModal.removeChild(currentMediaDisplay);
+        nextArrow.addEventListener("click",
+            () => {
+                const currentIndex = photographerMedia.indexOf((media));
+                const nextIndex = currentIndex + 1;
 
-            if (nextIndex >= 0 && nextIndex < this.photographerMedia.length-1){
-                this.getMediaId(nextIndex)
-            }
-        });
+                if (nextIndex >= 0 && nextIndex <= photographerMedia.length - 1) {
+                    this.getMediaId(nextIndex, photographerMedia, photographer);
+                }
+            });
+        }
     }
-
-}
-
-const modal = new ModalMedia();
-modal.createMediaModal()
 
 
 

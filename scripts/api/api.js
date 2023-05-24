@@ -28,6 +28,7 @@ class PhotographerManager {
         this.photographHeader = document.querySelector('.photograph-header');
         this.contactButton = document.querySelector('.contact_button');
 
+
         //filter medias according to the photographer's id
         this.photographerMedia = media.filter((media) => {
             return media.photographerId === parseInt(id);
@@ -46,7 +47,7 @@ class PhotographerManager {
         photographerPage.photographHeader.appendChild(this.contactButton);
         photographerPage.createPhotographImg(this.photographer);
         await photographerPage.displayDataMedia(this.photographerMedia);
-        //createMediaModal(photographerMedia, photographer);
+
 
         return this.photographer;
     }
