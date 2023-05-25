@@ -26,15 +26,23 @@
                 </header>
 
                 <form>
-                    <div>
-                        <label>Prénom</label>
-                        <input type="text" id="firstName"/>
-                        <label>Nom</label>
-                        <input type="text" id="lastName" />
-                        <label>Email</label>
-                        <input type="email" id="eMail" />
-                        <label>Votre message</label>
-                        <textarea id="message" > </textarea>
+                    <div id="form">
+                        <div class="form-input">
+                            <label>Prénom</label>
+                            <input type="text" id="firstName"/>
+                        </div>
+                        <div class="form-input">
+                            <label>Nom</label>
+                            <input type="text" id="lastName" />
+                        </div>
+                        <div class="form-input">
+                            <label>Email</label>
+                            <input type="email" id="eMail" />
+                        </div>
+                        <div class="form-input">
+                            <label>Votre message</label>
+                            <textarea id="message" > </textarea>
+                        </div>
                     </div>
 
                     <button class="contact_button" id="validate">Envoyer</button>
@@ -45,6 +53,7 @@
 
         <div class ="media-carrousel hidden">
             <div id="media_modal">
+                <a href ="#"  id="close_media" onclick="return false">	&#x2716</a>
                 <a href ="#" class= "previousArrow" onclick="return false">&#x2B9C;</a>
                 <div class="full-media"></div>
                 <a href ="#" class= "nextArrow" onclick="return false">&#x2B9E;</a>

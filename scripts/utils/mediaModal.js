@@ -49,6 +49,7 @@ class ModalMedia extends PhotographerPageManager {
      */
     createMediaModal(mediaId, media, photographer, photographerMedia) {
         const mediaModal = document.querySelector(".full-media");
+        const closeButton = document.querySelector("#close_media");
         let mediaDisplay;
         this.photographer = photographer;
         this.photographerMedia = photographerMedia;
@@ -64,6 +65,9 @@ class ModalMedia extends PhotographerPageManager {
             mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${mediaId}`);
             mediaDisplay.setAttribute("alt", media.title);
         }
+
+        closeButton.addEventListener("click",() => {this.closeMediaModal()});
+
         mediaModal.appendChild(mediaDisplay);
 
         this.previousMedia(media, photographerMedia, photographer);

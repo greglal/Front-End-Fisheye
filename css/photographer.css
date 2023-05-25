@@ -34,7 +34,7 @@
     position: fixed;
     z-index: 1;
     left: 25%;
-    top: 50px;
+    top: 30px;
 }
 
 .modal header {
@@ -175,4 +175,33 @@ form input {
     font-size: 24px;
     font-weight : bold;
     margin-top: 14px;
+}
+
+#close_media{
+    position: fixed;
+    color: #D3573C;
+    font-size : 60px;
+    left: 75%;
+    top: 5%;
+    text-decoration: none;
+}
+
+.invalid{
+    height:24px;
+}
+
+.form-input{
+    margin-top:-20px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top:20px;
+    height: 650px;
+}
+
+#validate{
+    margin-left: 40%;
 }

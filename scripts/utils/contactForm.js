@@ -28,17 +28,22 @@ function closeModal() {
  * @param message
  */
 function isInvalid(element, message) {
+    const invalidMessage = document.createElement("span");
+    invalidMessage.classList.add("invalid");
+
     element.style.border = "4px solid red";
-    element.setAttribute("placeholder", message);
+    invalidMessage.style.color="red";
+    invalidMessage.innerHTML = message;
+    element.parentElement.appendChild(invalidMessage);
 }
 
 /**
  * remove error message and red border when correct input
  */
 function removeErrorMessage(element){
+    const invalidMessage=document.querySelector(".invalid");
+    invalidMessage.classList.add("hidden");
     element.style.border= "0px";
-    element.style.backgroundColor = "";
-    element.setAttribute("placeholder","");
 }
 
 /**
@@ -136,6 +141,7 @@ function validate(){
         }
         if(isValid){
             document.querySelector("#contact_modal").style.display="none";
+            document.querySelector(".overlay").style.display="none";
         }
     });
 }

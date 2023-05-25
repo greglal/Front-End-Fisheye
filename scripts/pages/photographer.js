@@ -1,6 +1,7 @@
 'use strict';
 
 class PhotographerPageManager extends PhotographerManager {
+
     getPhotographer() {
         return super.getPhotographer();
     }
