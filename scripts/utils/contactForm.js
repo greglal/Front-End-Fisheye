@@ -4,7 +4,7 @@
  * display contact form modal
  */
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
+    const modal = document.getElementById("contact-modal");
     const overlay = document.querySelector(".overlay");
 
 	modal.style.display = "block";
@@ -15,7 +15,7 @@ function displayModal() {
  * close contact form modal
  */
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
+    const modal = document.getElementById("contact-modal");
     const overlay = document.querySelector(".overlay");
 
     modal.style.display = "none";
@@ -140,7 +140,7 @@ function validate(){
             return
         }
         if(isValid){
-            document.querySelector("#contact_modal").style.display="none";
+            document.querySelector("#contact-modal").style.display="none";
             document.querySelector(".overlay").style.display="none";
         }
     });

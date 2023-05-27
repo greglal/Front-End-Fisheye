@@ -48,7 +48,7 @@ class ModalMedia extends PhotographerPageManager {
      */
     createMediaModal(media, photographer, photographerMedia) {
         const mediaModal = document.querySelector("#full-media");
-        const closeButton = document.querySelector("#close_media");
+        const closeButton = document.querySelector("#close-media");
         let mediaDisplay;
         this.photographer = photographer;
         this.photographerMedia = photographerMedia;

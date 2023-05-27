@@ -1,4 +1,4 @@
-#contact_modal {
+#contact-modal {
     display: none;
 }
 
@@ -8,7 +8,7 @@
     margin: 0 100px;
 }
 
-.contact_button {
+.contact-button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -88,7 +88,7 @@ form input {
     align-self: center;
 }
 
-#media_modal{
+#media-modal{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -143,7 +143,7 @@ form input {
     color:white;
 }
 
-.counter_price{
+.counter-price{
     position: fixed;
     background-color: #D3573C;
     color: #525252;
@@ -165,19 +165,19 @@ form input {
     font-weight: bold;
 }
 
-.price_per_day{
+.price-per-day{
     margin-top:20px;
     font-size:18px;
     font-weight: bold;
 }
 
-.counter_heart{
+.counter-heart{
     font-size: 24px;
     font-weight : bold;
     margin-top: 14px;
 }
 
-#close_media{
+#close-media{
     position: fixed;
     color: #D3573C;
     font-size : 60px;

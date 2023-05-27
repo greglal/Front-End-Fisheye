@@ -159,8 +159,8 @@ class PhotographerPageManager extends PhotographerManager {
      * display total like counter and price per day
      */
     displayCounterAndPrice() {
-        const totalLikes = document.querySelector(".total_likes");
-        const pricePerDay = document.querySelector(".price_per_day");
+        const totalLikes = document.querySelector(".total-likes");
+        const pricePerDay = document.querySelector(".price-per-day");
         let counter = this.totalLikesCounter();
 
         totalLikes.textContent = counter ;

@@ -26,7 +26,7 @@ class PhotographerManager {
         const name = new URLSearchParams(query).get('name');
         const id = new URLSearchParams(query).get('id');
         this.photographHeader = document.querySelector('.photograph-header');
-        this.contactButton = document.querySelector('.contact_button');
+        this.contactButton = document.querySelector('.contact-button');
 
 
         //filter medias according to the photographer's id
