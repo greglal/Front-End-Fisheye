@@ -94,13 +94,13 @@ form input {
     justify-content: space-evenly;
 }
 
-.previousArrow{
+#previousArrow{
     font-size:100px;
     color: #901C1C;
     text-decoration: none;
 }
 
-.nextArrow{
+#nextArrow{
     font-size:100px;
     color: #901C1C;
     text-decoration: none;
@@ -119,20 +119,20 @@ form input {
     backdrop-filter: blur(5px);
 }
 
-.previousArrow{
+#previousArrow{
     margin-top:300px;
 }
 
-.nextArrow{
+#nextArrow{
     margin-top:300px;
 }
 
-.full-media{
+#full-media{
     width: 700px;
     height: 700px;
 }
 
-.full-media img{
+#full-media img{
     width: 700px;
     height : 700px;
     position: absolute;

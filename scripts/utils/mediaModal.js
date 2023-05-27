@@ -2,7 +2,6 @@
 
 class ModalMedia extends PhotographerPageManager {
 
-
     /**
      * opening media modal
      * add blur on page's background
@@ -47,8 +46,8 @@ class ModalMedia extends PhotographerPageManager {
      * @param photographer
      * @param photographerMedia
      */
-    createMediaModal(mediaId, media, photographer, photographerMedia) {
-        const mediaModal = document.querySelector(".full-media");
+    createMediaModal(media, photographer, photographerMedia) {
+        const mediaModal = document.querySelector("#full-media");
         const closeButton = document.querySelector("#close_media");
         let mediaDisplay;
         this.photographer = photographer;
@@ -57,12 +56,12 @@ class ModalMedia extends PhotographerPageManager {
         if(media.video) {
             mediaDisplay = document.createElement("video");
             mediaDisplay.controls = true;
-            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${mediaId}`);
+            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
             mediaDisplay.setAttribute("alt", media.title);
             mediaDisplay.classList.add("displayVideo");
         } else {
             mediaDisplay = document.createElement("img");
-            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${mediaId}`);
+            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
             mediaDisplay.setAttribute("alt", media.title);
         }
 
@@ -82,35 +81,24 @@ class ModalMedia extends PhotographerPageManager {
      * @param photographer
      */
     previousMedia(media, photographerMedia, photographer) {
-        const previousArrow = document.querySelector(".previousArrow");
-        const mediaModal = document.querySelector(".full-media");
-        const currentMediaDisplay = mediaModal.querySelector("img, video");
+        const previousArrow = document.querySelector("#previousArrow");
+        const mediaModal = document.querySelector("#full-media");
         this.photographer = photographer;
 
         previousArrow.addEventListener("click", () => {
             const currentIndex = photographerMedia.indexOf((media));
             const previousIndex = currentIndex - 1;
-            mediaModal.removeChild(currentMediaDisplay)
+            mediaModal.innerHTML="";
 
-            if (previousIndex >= 0 && previousIndex <= photographerMedia.length){
-                this.getMediaId(previousIndex, photographerMedia,photographer );
+            if (currentIndex > 0 && currentIndex < photographerMedia.length){
+                this.createMediaModal(photographerMedia[previousIndex],photographer, photographerMedia);
+                this.openMediaModal();
+                console.log("currentIndex: ", currentIndex)
+            } else {
+                this.createMediaModal(photographerMedia[currentIndex],photographer, photographerMedia);
+                this.openMediaModal();
             }
         });
-    }
-
-    /**
-     * pick media id
-     *
-     * @param i
-     * @param media
-     * @param photographer
-     */
-    getMediaId(i, media, photographer) {
-        const allMedias = document.querySelectorAll(".media-img");
-        const mediaId = allMedias[i].getAttribute("id");
-
-        this. createMediaModal(mediaId, media[i], photographer, media);
-        this. openMediaModal();
     }
 
     /**
@@ -121,19 +109,22 @@ class ModalMedia extends PhotographerPageManager {
      * @param photographer
      */
     nextMedia(media, photographerMedia, photographer) {
-        const nextArrow = document.querySelector(".nextArrow");
-        const mediaModal = document.querySelector(".full-media");
-        const currentMediaDisplay = mediaModal.querySelector("img, video");
+        const nextArrow = document.querySelector("#nextArrow");
+        const mediaModal = document.querySelector("#full-media");
         this.photographer = photographer;
 
         nextArrow.addEventListener("click",
             () => {
                 const currentIndex = photographerMedia.indexOf((media));
                 const nextIndex = currentIndex + 1;
-                mediaModal.removeChild(currentMediaDisplay)
+                mediaModal.innerHTML="";
 
-                if (nextIndex >= 0 && nextIndex <= photographerMedia.length - 1) {
-                    this.getMediaId(nextIndex, photographerMedia, photographer);
+                if (currentIndex >= 0 && currentIndex < photographerMedia.length - 1) {
+                    this.createMediaModal(photographerMedia[nextIndex],photographer, photographerMedia);
+                    this.openMediaModal();
+                }else {
+                    this.createMediaModal(photographerMedia[currentIndex],photographer, photographerMedia);
+                    this.openMediaModal();
                 }
             });
         }

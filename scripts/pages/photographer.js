@@ -124,12 +124,13 @@ class PhotographerPageManager extends PhotographerManager {
 
         mediaSection.innerHTML = "";
 
-        photographerMedia.forEach((media, index) => {
+        photographerMedia.forEach((media) => {
             const mediaCardDOM = this.createMediaArticle(media, this.photographer);
             i++
 
             mediaCardDOM.mediaImg.addEventListener("click", () => {
-                mediaModal.getMediaId(index, photographerMedia, this.photographer)
+                mediaModal.createMediaModal(media, this.photographer, photographerMedia);
+                mediaModal.openMediaModal();
             });
             mediaSection.appendChild(mediaCardDOM.mediaArticle);
         });
@@ -201,6 +202,7 @@ class PhotographerPageManager extends PhotographerManager {
             }
             photographerMedia.forEach((media) => {
                 const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                this.displayDataMedia(photographerMedia);
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })
@@ -229,6 +231,7 @@ class PhotographerPageManager extends PhotographerManager {
             }
             photographerMedia.forEach((media) => {
                 const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                this.displayDataMedia(photographerMedia);
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })
@@ -264,6 +267,7 @@ class PhotographerPageManager extends PhotographerManager {
             }
             photographerMedia.forEach((media) => {
                 const mediaCardDOM = this.createMediaArticle(media, this.photographer);
+                this.displayDataMedia(photographerMedia);
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })

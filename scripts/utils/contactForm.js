@@ -99,7 +99,7 @@ function testEMail() {
         return true;
     }
 
-}
+    }
 
 /**
  * test if message input is completed
