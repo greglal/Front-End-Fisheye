@@ -71,12 +71,14 @@ class PhotographerPageManager extends PhotographerManager {
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
             mediaImg.setAttribute("alt", media.title);
             mediaImg.setAttribute("id", media.video);
+            mediaImg.setAttribute("aria-label", `${media.title}, closeup view`)
         } else {
             mediaImg = document.createElement('img');
             mediaArticle.appendChild(mediaImg);
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
             mediaImg.setAttribute("alt", media.title);
             mediaImg.setAttribute("id", media.image);
+            mediaImg.setAttribute("aria-label", `${media.title}, closeup view`)
         }
 
         mediaArticle.classList.add("media-article");
@@ -95,6 +97,7 @@ class PhotographerPageManager extends PhotographerManager {
 
         heart.setAttribute("href", "#");
         heart.setAttribute("onclick", "return false");
+        heart.setAttribute("aria-label", "likes");
 
         mediaTitle.textContent = media.title;
         numberOfLikes.textContent = media.likes;
@@ -191,9 +194,14 @@ class PhotographerPageManager extends PhotographerManager {
      */
     sortByPopularity(photographerMedia){
         const popularityButton = document.querySelector("#popularity");
+        const dateButton = document.querySelector("#date");
+        const titleButton = document.querySelector("#title");
         const mediaSection = document.querySelector('.media-section');
 
         popularityButton.addEventListener("click", () => {
+            popularityButton.setAttribute("aria-selected", "true");
+            dateButton.setAttribute("aria-selected", "false");
+            titleButton.setAttribute("aria-selected", "false");
             photographerMedia.sort(function(a, b){
                 return b.likes - a.likes
             })
@@ -216,10 +224,15 @@ class PhotographerPageManager extends PhotographerManager {
      * @param photographerMedia
      */
     sortByDate(photographerMedia){
+        const popularityButton = document.querySelector("#popularity");
         const dateButton = document.querySelector("#date");
+        const titleButton = document.querySelector("#title");
         const mediaSection = document.querySelector('.media-section');
 
         dateButton.addEventListener("click", () => {
+            dateButton.setAttribute("aria-selected", "true");
+            popularityButton.setAttribute("aria-selected", "false");
+            titleButton.setAttribute("aria-selected", "false");
             photographerMedia.sort(function(a, b){
                 const dateA = new Date(a.date);
                 const dateB = new Date(b.date);
@@ -245,10 +258,15 @@ class PhotographerPageManager extends PhotographerManager {
      * @param photographerMedia
      */
     sortByTitle(photographerMedia){
+        const popularityButton = document.querySelector("#popularity");
+        const dateButton = document.querySelector("#date");
         const titleButton = document.querySelector("#title");
         const mediaSection = document.querySelector('.media-section');
 
         titleButton.addEventListener("click", () => {
+            titleButton.setAttribute("aria-selected", "true");
+            popularityButton.setAttribute("aria-selected", "false");
+            dateButton.setAttribute("aria-selected", "false");
             photographerMedia.sort(function(a, b){
                 const titleA = a.title.toLowerCase();
                 const titleB = b.title.toLowerCase();
@@ -272,6 +290,8 @@ class PhotographerPageManager extends PhotographerManager {
             });
         })
     }
+
+
 
 }
 

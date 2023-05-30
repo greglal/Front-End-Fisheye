@@ -9,44 +9,44 @@
   </head>
   <body>
     <header>
-        <a href="index.html">
-            <img src="assets/images/logo.png" class="logo" />
+        <a href="index.html" aria-current="page">
+            <img src="assets/images/logo.png" class="logo" alt="Fisheye Home Page"/>
         </a>
     </header>
 
     <main id="main">
       <div class="photograph-header">
-        <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact-button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
       </div>
         <div id="contact-modal">
             <div class="modal">
                 <header>
                     <h2>Contactez-moi</h2>
                     <p id="photograph-name"></p>
-                    <img src="assets/icons/close.svg" onclick="closeModal()" />
+                    <img src="assets/icons/close.svg" onclick="closeModal()" alt="Close contact form" />
                 </header>
 
                 <form>
                     <div id="form">
                         <div class="form-input">
-                            <label>Prénom</label>
-                            <input type="text" id="firstName"/>
+                            <label for="firstName" id="First name">Prénom</label>
+                            <input type="text" id="firstName" aria-labelledby="First name"/>
                         </div>
                         <div class="form-input">
-                            <label>Nom</label>
-                            <input type="text" id="lastName" />
+                            <label for ="lastName" id="Last name">Nom</label>
+                            <input type="text" id="lastName" aria-labelledby="Last name"/>
                         </div>
                         <div class="form-input">
-                            <label>Email</label>
-                            <input type="email" id="eMail" />
+                            <label for="e-Mail" id="Email">Email</label>
+                            <input type="email" id="e-Mail" aria-labelledby="Email"/>
                         </div>
                         <div class="form-input">
-                            <label>Votre message</label>
-                            <textarea id="message" > </textarea>
+                            <label for="message" id="Your message">Votre message</label>
+                            <textarea id="message" aria-labelledby="Your message"> </textarea>
                         </div>
                     </div>
 
-                    <button class="contact-button" id="validate">Envoyer</button>
+                    <button class="contact-button" id="validate" aria-label="send">Envoyer</button>
                 </form>
 
             </div>
@@ -54,21 +54,25 @@
 
         <div class ="media-carrousel hidden">
             <div id="media-modal">
-                <a href ="#" id="close-media" onclick="return false">	&#x2716</a>
-                <a href ="#" id= "previousArrow" onclick="return false">&#x2B9C;</a>
+                <a href ="#" id="close-media" onclick="return false" aria-label="close dialog">	&#x2716</a>
+                <a href ="#" id= "previousArrow" onclick="return false" aria-label="Previous image">&#x2B9C;</a>
                 <div id="full-media"></div>
-                <a href ="#" id= "nextArrow" onclick="return false">&#x2B9E;</a>
+                <a href ="#" id= "nextArrow" onclick="return false" aria-label="Next image">&#x2B9E;</a>
             </div>
         </div>
 
         <div class="filter-div">
-            <h3 class="dropdown">Trier par  &#9660</h3>
-            <ul class="filter-menu" >
-                <li ><a href="#" onclick="return false" class="sortLink" id="popularity">Popularité</a></li>
+            <button id="filter-button" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                    tabindex="0">Trier par</button>
+            <ul class="filter-menu"  >
+                <li><a href="#" onclick="return false" class="sortLink" id="popularity" role="listbox"
+                    aria-activedescendant="popularity" aria-selected="false" aria-labelledby="filter-button" >Popularité</a></li>
                 <hr>
-                <li ><a href="#" onclick="return false" class="sortLink" id="date">Date</a></li>
+                <li ><a href="#" onclick="return false" class="sortLink" id="date" role="listbox"
+                        aria-activedescendant="date" aria-selected="false" aria-labelledby="filter-button">Date</a></li>
                 <hr>
-                <li ><a href="#" onclick="return false" class="sortLink" id="title">Titre</a></li>
+                <li ><a href="#" onclick="return false" class="sortLink" id="title" role="listbox"
+                        aria-activedescendant="title" aria-selected="false" aria-labelledby="filter-button">Titre</a></li>
             </ul>
         </div>
 

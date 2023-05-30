@@ -31,8 +31,10 @@ class ModalMedia extends PhotographerPageManager {
         const photographHeader = document.querySelector(".photograph-header");
         const filter = document.querySelector(".filter-div");
         const mediaSection = document.querySelector(".media-section");
+        const media = document.querySelector("#full-media");
 
         mediaModal.style.display = "none";
+        media.innerHTML="";
         overlay.classList.add("hidden");
         photographHeader.classList.remove("hidden");
         filter.classList.remove("hidden");
@@ -58,11 +60,13 @@ class ModalMedia extends PhotographerPageManager {
             mediaDisplay.controls = true;
             mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
             mediaDisplay.setAttribute("alt", media.title);
+            mediaDisplay.setAttribute("aria-label", "video closeup view");
             mediaDisplay.classList.add("displayVideo");
         } else {
             mediaDisplay = document.createElement("img");
             mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
             mediaDisplay.setAttribute("alt", media.title);
+            mediaDisplay.setAttribute("aria-label", "image closeup view");
         }
 
         closeButton.addEventListener("click",() => {this.closeMediaModal()});
