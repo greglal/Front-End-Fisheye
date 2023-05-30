@@ -140,6 +140,7 @@ class PhotographerPageManager extends PhotographerManager {
         this.sortByPopularity(photographerMedia);
         this.sortByDate(photographerMedia);
         this.sortByTitle(photographerMedia);
+        this.openSortMenu();
     }
 
     /**
@@ -291,6 +292,27 @@ class PhotographerPageManager extends PhotographerManager {
         })
     }
 
+    /**
+     * open sort menu by keypress enter or space
+     */
+    openSortMenu() {
+        const filterButton = document.querySelector("#filter-button");
+        filterButton.addEventListener("keydown", (event) => {
+            if (event.keyCode === 13 || event.keyCode === 32) {
+                event.preventDefault();
+                const isExpended =filterButton.getAttribute("aria-expended") === "true";
+                const filterMenu = document.querySelector("#filter-menu");
+
+                if(isExpended){
+                    filterMenu.style.display = "none";
+                    filterButton.setAttribute("aria-expanded", "false");
+                }else{
+                    filterMenu.style.display = "block";
+                    filterButton.setAttribute("aria-expanded", "true");
+                }
+            }
+        })
+    };
 
 
 }

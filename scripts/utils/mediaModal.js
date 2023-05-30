@@ -43,7 +43,6 @@ class ModalMedia extends PhotographerPageManager {
 
     /**
      *
-     * @param mediaId
      * @param media
      * @param photographer
      * @param photographerMedia

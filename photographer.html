@@ -30,19 +30,19 @@
                     <div id="form">
                         <div class="form-input">
                             <label for="firstName" id="First name">Prénom</label>
-                            <input type="text" id="firstName" aria-labelledby="First name"/>
+                            <input type="text" id="firstName" aria-labelledby="First name" aria-required="true"/>
                         </div>
                         <div class="form-input">
                             <label for ="lastName" id="Last name">Nom</label>
-                            <input type="text" id="lastName" aria-labelledby="Last name"/>
+                            <input type="text" id="lastName" aria-labelledby="Last name" aria-required="true"/>
                         </div>
                         <div class="form-input">
                             <label for="e-Mail" id="Email">Email</label>
-                            <input type="email" id="e-Mail" aria-labelledby="Email"/>
+                            <input type="email" id="e-Mail" aria-labelledby="Email" aria-required="true"/>
                         </div>
                         <div class="form-input">
                             <label for="message" id="Your message">Votre message</label>
-                            <textarea id="message" aria-labelledby="Your message"> </textarea>
+                            <textarea id="message" aria-labelledby="Your message" aria-required="true"> </textarea>
                         </div>
                     </div>
 
@@ -62,9 +62,9 @@
         </div>
 
         <div class="filter-div">
-            <button id="filter-button" class="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+            <button id="filter-button" class="dropdown" role="button" aria-haspopup="listbox" aria-expanded="false"
                     tabindex="0">Trier par</button>
-            <ul class="filter-menu"  >
+            <ul id="filter-menu"  >
                 <li><a href="#" onclick="return false" class="sortLink" id="popularity" role="listbox"
                     aria-activedescendant="popularity" aria-selected="false" aria-labelledby="filter-button" >Popularité</a></li>
                 <hr>

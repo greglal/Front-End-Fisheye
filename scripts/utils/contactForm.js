@@ -87,7 +87,7 @@ function testLastName() {
  * @returns {boolean}
  */
 function testEMail() {
-    const eMail = document.querySelector("#eMail");
+    const eMail = document.querySelector("#e-Mail");
     const errorEMailMessage = "Veuillez renseigner votre adresse mail";
 
     if (eMail.value.length <= 2){
