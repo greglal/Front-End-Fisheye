@@ -16,6 +16,7 @@ class PhotographerPageManager extends PhotographerManager {
         const photographName = document.createElement('h2');
         const photographLocation = document.createElement('h3');
         const photographTagLine = document.createElement('p');
+        const modalTitle=document.querySelector(".contact-button");
 
         photographDescription.classList.add('photographer-description');
         this.photographHeader.appendChild(photographDescription);
@@ -29,6 +30,10 @@ class PhotographerPageManager extends PhotographerManager {
 
         photographDescription.appendChild(photographTagLine);
         photographTagLine.textContent = photographer.tagline;
+
+        modalTitle.addEventListener("click", () => {
+            displayModal(photographer);
+        })
     }
 
     /**
@@ -67,19 +72,19 @@ class PhotographerPageManager extends PhotographerManager {
         //create img or video caption
         if (media.video) {
             mediaImg = document.createElement('video');
-            mediaArticle.appendChild(mediaImg);
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
-            mediaImg.setAttribute("alt", media.title);
             mediaImg.setAttribute("id", media.video);
-            mediaImg.setAttribute("aria-label", `${media.title}, closeup view`)
         } else {
             mediaImg = document.createElement('img');
-            mediaArticle.appendChild(mediaImg);
             mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
-            mediaImg.setAttribute("alt", media.title);
             mediaImg.setAttribute("id", media.image);
-            mediaImg.setAttribute("aria-label", `${media.title}, closeup view`)
         }
+
+        mediaArticle.appendChild(mediaImg);
+
+        mediaImg.setAttribute("alt", media.title);
+        mediaImg.setAttribute("aria-label", `${media.title}, closeup view`);
+        mediaImg.setAttribute("tabindex", "0");
 
         mediaArticle.classList.add("media-article");
         mediaDetails.classList.add("media-details");
@@ -294,6 +299,7 @@ class PhotographerPageManager extends PhotographerManager {
 
     /**
      * open sort menu by keypress enter or space
+     * close sort menu by keypress escape
      */
     openSortMenu() {
         const filterButton = document.querySelector("#filter-button");
@@ -310,6 +316,12 @@ class PhotographerPageManager extends PhotographerManager {
                     filterMenu.style.display = "block";
                     filterButton.setAttribute("aria-expanded", "true");
                 }
+            } else if(event.keyCode === 27){
+                event.preventDefault();
+                // const isExpended =filterButton.getAttribute("aria-expended") === "false";
+                const filterMenu = document.querySelector("#filter-menu");
+                filterMenu.style.display = "none";
+                filterButton.setAttribute("aria-expanded", "false");
             }
         })
     };

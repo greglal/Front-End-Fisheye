@@ -24,7 +24,7 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,7 @@
     margin: auto;
     position: fixed;
     z-index: 1;
-    left: 25%;
+    left: 35%;
     top: 30px;
 }
 
@@ -50,6 +50,7 @@
     font-size: 64px;
     font-weight: normal;
     text-align: center;
+    color: black;
 }
 
 form {
@@ -198,8 +199,8 @@ form input {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-top:20px;
-    height: 650px;
+    margin-top:50px;
+    height: 700px;
 }
 
 #validate{

@@ -3,10 +3,12 @@
 /**
  * display contact form modal
  */
-function displayModal() {
+function displayModal(photographer) {
     const modal = document.getElementById("contact-modal");
     const overlay = document.querySelector(".overlay");
+    const modalTitle=document.querySelector("#modal-title");
 
+    modalTitle.innerHTML =`Contactez-moi </br> ${photographer.name}`;
 	modal.style.display = "block";
     overlay.classList.remove("hidden");
 }
@@ -42,8 +44,10 @@ function isInvalid(element, message) {
  */
 function removeErrorMessage(element){
     const invalidMessage=document.querySelector(".invalid");
-    invalidMessage.classList.add("hidden");
-    element.style.border= "0px";
+    if (invalidMessage){
+        invalidMessage.classList.add("hidden");
+        element.style.border= "0px";
+    }
 }
 
 /**

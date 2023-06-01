@@ -38,17 +38,20 @@ function photographerFactory(data) {
         // photographer's location (city + country)
         const location = document.createElement('h3');
         location.textContent = `${city}, ${country}`;
+        location.setAttribute("tabindex", "0");
         divPresentation.appendChild(location);
 
         // photographer's tag
         const tag = document.createElement('p');
         tag.textContent = tagline;
+        tag.setAttribute("tabindex", "0");
         divPresentation.appendChild(tag);
 
         // price per day
         const pricePerDay = document.createElement('p');
         pricePerDay.textContent = `${price}€/jour`;
         pricePerDay.classList.add('price');
+        pricePerDay.setAttribute("tabindex", "0");
         divPresentation.appendChild(pricePerDay);
     }
 
