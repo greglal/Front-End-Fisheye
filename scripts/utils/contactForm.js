@@ -7,10 +7,52 @@ function displayModal(photographer) {
     const modal = document.getElementById("contact-modal");
     const overlay = document.querySelector(".overlay");
     const modalTitle=document.querySelector("#modal-title");
+    const focusableSelector = "button, a, input, textarea, img";
+    let focusables =[];
+    const closeCross = document.querySelector("#close-cross");
 
     modalTitle.innerHTML =`Contactez-moi </br> ${photographer.name}`;
 	modal.style.display = "block";
     overlay.classList.remove("hidden");
+    modal.setAttribute("aria-modal", "true");
+
+    modal.addEventListener("keydown", (event) => {
+        if(event.keyCode === 27){
+            event.preventDefault();
+            closeModal();
+        }else if(event.keyCode === 9){
+            event.preventDefault();
+            focusables = Array.from (modal.querySelectorAll(focusableSelector));
+            let index = focusables.findIndex(f => f === modal.querySelector(":focus"));
+            index++;
+
+            console.log(focusables)
+            if(index >= focusables.length){
+                index = 0;
+            }
+            focusables[index].focus();
+        }
+    })
+
+    closeCross.addEventListener("click", () => {
+        closeModal();
+    })
+
+    closeCross.addEventListener("keydown", (event) => {
+        if (event.keyCode === 13 || event.keyCode === 32){
+            closeModal();
+        }
+    })
+}
+
+/**
+ *
+ * @param event
+ */
+function focusInModal(event){
+
+    event.preventDefault();
+
 }
 
 /**
@@ -22,6 +64,8 @@ function closeModal() {
 
     modal.style.display = "none";
     overlay.classList.add("hidden");
+
+    modal.removeAttribute("aria-modal");
 }
 
 /**

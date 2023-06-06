@@ -326,7 +326,6 @@ class PhotographerPageManager extends PhotographerManager {
         })
     };
 
-
 }
 
 const photographerPage = new PhotographerPageManager();

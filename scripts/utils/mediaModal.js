@@ -19,6 +19,13 @@ class ModalMedia extends PhotographerPageManager {
         filter.classList.add("hidden");
         mediaSection.classList.add("hidden");
         overlay.setAttribute("onclick",() => {this.closeMediaModal()});
+
+        mediaModal  .addEventListener("keydown", (event) => {
+            if(event.keyCode === 27){
+                event.preventDefault();
+                this.closeMediaModal();
+            }
+        })
     }
 
     /**
@@ -50,27 +57,53 @@ class ModalMedia extends PhotographerPageManager {
     createMediaModal(media, photographer, photographerMedia) {
         const mediaModal = document.querySelector("#full-media");
         const closeButton = document.querySelector("#close-media");
+        const fullModal = document.querySelector("#media-modal");
         let mediaDisplay;
+        const focusableMediaSelector = "a, img, video";
+        let focusablesMedia =[];
         this.photographer = photographer;
         this.photographerMedia = photographerMedia;
 
+
+            mediaDisplay = document.createElement(media.video ? "video":"img") ;
+            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.video || media.image}`);
+            mediaDisplay.setAttribute("alt", media.title);
+            mediaDisplay.setAttribute("aria-label", `${media.video ? "video" : "image"} closeup view`);
+            mediaDisplay.setAttribute("tabindex", "0");
+            this.currentMediaElement = mediaDisplay;
+
         if(media.video) {
-            mediaDisplay = document.createElement("video");
             mediaDisplay.controls = true;
-            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
-            mediaDisplay.setAttribute("alt", media.title);
-            mediaDisplay.setAttribute("aria-label", "video closeup view");
             mediaDisplay.classList.add("displayVideo");
-        } else {
-            mediaDisplay = document.createElement("img");
-            mediaDisplay.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
-            mediaDisplay.setAttribute("alt", media.title);
-            mediaDisplay.setAttribute("aria-label", "image closeup view");
         }
 
         closeButton.addEventListener("click",() => {this.closeMediaModal()});
+        closeButton.addEventListener("keydown", (event) =>{
+            if (event.keyCode === 13 || event.keyCode === 32) {
+                this.closeMediaModal();
+            }
+        })
 
         mediaModal.appendChild(mediaDisplay);
+
+
+
+        fullModal.addEventListener("keydown", (event) =>{
+            if(event.keyCode === 27){
+                event.preventDefault();
+                this.closeMediaModal()
+            }else if(event.keyCode === 9){
+                event.preventDefault();
+                focusablesMedia = Array.from (fullModal.querySelectorAll(focusableMediaSelector));
+                let index = focusablesMedia.findIndex(f => f === fullModal.querySelector(":focus"));
+                index++;
+
+                if(index >= focusablesMedia.length){
+                    index = 0;
+                }
+                focusablesMedia[index].focus();
+            }
+        })
 
         this.previousMedia(media, photographerMedia, photographer);
         this.nextMedia(media, photographerMedia, photographer);
@@ -96,10 +129,11 @@ class ModalMedia extends PhotographerPageManager {
             if (currentIndex > 0 && currentIndex < photographerMedia.length){
                 this.createMediaModal(photographerMedia[previousIndex],photographer, photographerMedia);
                 this.openMediaModal();
-                console.log("currentIndex: ", currentIndex)
+                this.currentMediaElement.focus();
             } else {
                 this.createMediaModal(photographerMedia[currentIndex],photographer, photographerMedia);
                 this.openMediaModal();
+                this.currentMediaElement.focus();
             }
         });
     }
@@ -125,12 +159,13 @@ class ModalMedia extends PhotographerPageManager {
                 if (currentIndex >= 0 && currentIndex < photographerMedia.length - 1) {
                     this.createMediaModal(photographerMedia[nextIndex],photographer, photographerMedia);
                     this.openMediaModal();
+                    this.currentMediaElement.focus();
                 }else {
                     this.createMediaModal(photographerMedia[currentIndex],photographer, photographerMedia);
                     this.openMediaModal();
+                    this.currentMediaElement.focus();
                 }
             });
         }
-
 }
 

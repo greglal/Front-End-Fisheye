@@ -22,7 +22,8 @@
             <div class="modal">
                 <header>
                     <h2 id="modal-title"></h2>
-                    <img src="assets/icons/close.svg" onclick="closeModal()" alt="close dialog" />
+                    <img src="assets/icons/close.svg" id="close-cross" onclick="closeModal()" alt="close dialog"
+                         tabindex="0"/>
                 </header>
 
                 <form>
@@ -53,10 +54,11 @@
 
         <div class ="media-carrousel hidden">
             <div id="media-modal">
-                <a href ="#" id="close-media" onclick="return false" aria-label="close dialog">	&#x2716</a>
-                <a href ="#" id= "previousArrow" onclick="return false" aria-label="Previous image">&#x2B9C;</a>
+                <a href ="#" id="close-media" onclick="return false" aria-label="close dialog" tabindex="0">
+                    &#x2716</a>
+                <a href ="#" id= "previousArrow" onclick="return false" aria-label="Previous image" tabindex="0">&#x2B9C;</a>
                 <div id="full-media"></div>
-                <a href ="#" id= "nextArrow" onclick="return false" aria-label="Next image">&#x2B9E;</a>
+                <a href ="#" id= "nextArrow" onclick="return false" aria-label="Next image" tabindex="0">&#x2B9E;</a>
             </div>
         </div>
 
