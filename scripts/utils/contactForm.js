@@ -46,16 +46,6 @@ function displayModal(photographer) {
 }
 
 /**
- *
- * @param event
- */
-function focusInModal(event){
-
-    event.preventDefault();
-
-}
-
-/**
  * close contact form modal
  */
 function closeModal() {
