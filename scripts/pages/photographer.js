@@ -70,15 +70,9 @@ class PhotographerPageManager extends PhotographerManager {
         let mediaImg;
 
         //create img or video caption
-        if (media.video) {
-            mediaImg = document.createElement('video');
-            mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video}`);
-            mediaImg.setAttribute("id", media.video);
-        } else {
-            mediaImg = document.createElement('img');
-            mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.image}`);
-            mediaImg.setAttribute("id", media.image);
-        }
+        mediaImg = document.createElement(media.video ? "video" : "img");
+        mediaImg.setAttribute("src", `/assets/images/${photographer.asset}/${media.video || media.image}`);
+        mediaImg.setAttribute("id", media.video || media.image);
 
         mediaArticle.appendChild(mediaImg);
 
@@ -140,6 +134,13 @@ class PhotographerPageManager extends PhotographerManager {
                 mediaModal.createMediaModal(media, this.photographer, photographerMedia);
                 mediaModal.openMediaModal();
             });
+
+            mediaCardDOM.mediaImg.addEventListener("keydown", (event) => {
+                if (event.keyCode === 13 || event.keyCode === 32){
+                    mediaModal.createMediaModal(media, this.photographer, photographerMedia);
+                    mediaModal.openMediaModal();
+                }
+            })
             mediaSection.appendChild(mediaCardDOM.mediaArticle);
         });
         this.sortByPopularity(photographerMedia);
@@ -220,6 +221,16 @@ class PhotographerPageManager extends PhotographerManager {
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })
+
+        popularityButton.addEventListener("keydown", (event) => {
+            const filterButton = document.querySelector("#filter-button");
+            if (event.keyCode === 27){
+                event.preventDefault();
+                const filterMenu = document.querySelector("#filter-menu");
+                filterMenu.style.display = "none";
+                filterButton.setAttribute("aria-expanded", "false");
+            }
+        })
     }
 
     /**
@@ -254,6 +265,17 @@ class PhotographerPageManager extends PhotographerManager {
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })
+
+        dateButton.addEventListener("keydown", (event) => {
+            const filterButton = document.querySelector("#filter-button");
+            if (event.keyCode === 27){
+                event.preventDefault();
+                const filterMenu = document.querySelector("#filter-menu");
+                filterMenu.style.display = "none";
+                filterButton.setAttribute("aria-expanded", "false");
+            }
+        })
+
     }
 
     /**
@@ -295,6 +317,16 @@ class PhotographerPageManager extends PhotographerManager {
                 mediaSection.appendChild(mediaCardDOM.mediaArticle);
             });
         })
+
+        titleButton.addEventListener("keydown", (event) => {
+            const filterButton = document.querySelector("#filter-button");
+            if (event.keyCode === 27){
+                event.preventDefault();
+                const filterMenu = document.querySelector("#filter-menu");
+                filterMenu.style.display = "none";
+                filterButton.setAttribute("aria-expanded", "false");
+            }
+        })
     }
 
     /**
@@ -318,14 +350,12 @@ class PhotographerPageManager extends PhotographerManager {
                 }
             } else if(event.keyCode === 27){
                 event.preventDefault();
-                // const isExpended =filterButton.getAttribute("aria-expended") === "false";
                 const filterMenu = document.querySelector("#filter-menu");
                 filterMenu.style.display = "none";
                 filterButton.setAttribute("aria-expanded", "false");
             }
         })
     };
-
 }
 
 const photographerPage = new PhotographerPageManager();
