@@ -1,4 +1,4 @@
-/*'use strict';*/
+'use strict';
 
 /**
  * display contact form modal
