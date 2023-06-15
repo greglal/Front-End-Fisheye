@@ -1,4 +1,4 @@
-/*'use strict';*/
+'use strict';
 
 class IndexPageManager extends PhotographerManager {
     async displayData(photographers) {
