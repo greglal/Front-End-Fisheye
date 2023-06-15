@@ -117,7 +117,7 @@ class PhotographerPageManager extends PhotographerManager {
      *
      * @param photographerMedia
      */
-     displayDataMedia(photographerMedia) {
+     async displayDataMedia(photographerMedia) {
         let i=-1;
         const mediaSection = document.querySelector('.media-section');
         const mediaModal = new ModalMedia;
