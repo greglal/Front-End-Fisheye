@@ -8,7 +8,7 @@ class PhotographerManager {
      * @returns {Promise<any>}
      */
     async getPhotographers() {
-        const photographers = await fetch('../data/photographers.json')
+        const photographers = await fetch('/../data/photographers.json')
             .then((data) => data.json())
         return photographers;
     }
