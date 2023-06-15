@@ -26,7 +26,6 @@ function displayModal(photographer) {
             let index = focusables.findIndex(f => f === modal.querySelector(":focus"));
             index++;
 
-            console.log(focusables)
             if(index >= focusables.length){
                 index = 0;
             }
@@ -34,9 +33,7 @@ function displayModal(photographer) {
         }
     })
 
-    closeCross.addEventListener("click", () => {
-        closeModal();
-    })
+    closeCross.addEventListener("click", () => {closeModal();})
 
     closeCross.addEventListener("keydown", (event) => {
         if (event.keyCode === 13 || event.keyCode === 32){

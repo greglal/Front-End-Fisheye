@@ -83,7 +83,6 @@ form input {
 .media-carrousel {
     width:2000px;
     position: fixed;
-    left: 5%;
     z-index: 1;
     margin:auto;
     align-self: center;
@@ -200,7 +199,7 @@ form input {
     flex-direction: column;
     justify-content: space-evenly;
     margin-top:50px;
-    height: 700px;
+    height: 600px;
 }
 
 #validate{

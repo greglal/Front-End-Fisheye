@@ -39,7 +39,8 @@ class PhotographerManager {
             return photographer.name === name;
         });
 
-        const {name: photographerName, portrait: photographerPortrait, altLabel, city, country, tagline, price: pricePhotograpger, id: idPhotographer, asset} = this.photographer;
+        const {name: photographerName, portrait: photographerPortrait, altLabel, city, country, tagline,
+            price: pricePhotograpger, id: idPhotographer, asset} = this.photographer;
         const {id: mediaId, photographerId, title: mediaTitle, video, image, likes, date, price: priceMedia} = this.photographerMedia;
         picture = `assets/photographers/${this.photographer.portrait}`;
 

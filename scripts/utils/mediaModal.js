@@ -5,7 +5,7 @@ class ModalMedia extends PhotographerPageManager {
     /**
      * opening media modal
      * add blur on page's background
-     */
+     */  A 
     openMediaModal(){
         const mediaModal = document.querySelector(".media-carrousel");
         const overlay = document.querySelector(".overlay");
@@ -59,7 +59,6 @@ class ModalMedia extends PhotographerPageManager {
         const closeButton = document.querySelector("#close-media");
         this.fullModal = document.querySelector("#media-modal");
         let mediaDisplay;
-
         this.photographer = photographer;
         this.photographerMedia = photographerMedia;
 

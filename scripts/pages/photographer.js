@@ -114,12 +114,10 @@ class PhotographerPageManager extends PhotographerManager {
     }
 
     /**
-     * loop on each media to create articles
      *
      * @param photographerMedia
-     * @returns {Promise<void>}
      */
-    async displayDataMedia(photographerMedia) {
+     displayDataMedia(photographerMedia) {
         let i=-1;
         const mediaSection = document.querySelector('.media-section');
         const mediaModal = new ModalMedia;
